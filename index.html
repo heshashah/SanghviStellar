@@ -148,6 +148,19 @@
             }
         }
 
+        @media (max-width: 768px) {
+
+            /* This targets screens from 0px up to 768px */
+            .product-card {
+                width: 49%;
+                /* Roughly 2 cards per row (2 * 49% = 98%, leaving 2% for gap) */
+                margin: 0.5%;
+                /* Small margin to create space between cards */
+                box-sizing: border-box;
+                /* Ensures padding and border are included in the width */
+            }
+        }
+
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@400;600&display=swap');
 
         body {
