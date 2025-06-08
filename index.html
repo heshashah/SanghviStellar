@@ -17,279 +17,6 @@
         .heading {
             font-family: 'Playfair Display', serif;
         }
-
-        .room-container {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .room-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(3px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transform: translateX(-100%);
-            transition: transform 0.4s ease;
-            padding: 1rem;
-        }
-
-        .room-container:hover .room-overlay {
-            transform: translateX(0);
-        }
-
-        .room-overlay-text {
-            color: #fff;
-            text-align: center;
-            opacity: 0;
-            transition: opacity 0.3s ease 0.2s;
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
-        .room-container:hover .room-overlay-text {
-            opacity: 1;
-        }
-
-        #product-scroll {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            overflow: hidden;
-            width: 100%;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .product-card {
-            flex: 0 0 calc(33.333% - 1rem);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 0.5rem;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.3s;
-            background: white;
-        }
-
-        .product-card:hover {
-            transform: scale(1.05);
-        }
-
-        .product-card.hidden {
-            display: none;
-        }
-
-        #prevBtn,
-        #nextBtn {
-            background: white;
-            border: none;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            font-size: 20px;
-            cursor: pointer;
-            user-select: none;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 20;
-        }
-
-        #prevBtn {
-            left: 10px;
-        }
-
-        #nextBtn {
-            right: 10px;
-        }
-
-        #prevBtn:disabled,
-        #nextBtn:disabled {
-            opacity: 0.3;
-            cursor: default;
-        }
-
-        /* Overlay for mobile remains unchanged */
-        @media (max-width: 768px) {
-            .product-card {
-                width: 49.5%;
-                /* Slightly bigger cards */
-                margin: 0.25%;
-                /* Small horizontal spacing */
-                box-sizing: border-box;
-            }
-
-            @media (max-width: 768px) {
-                #product-scroll {
-                    display: flex;
-                    flex-wrap: wrap;
-                    /* Allows cards to wrap to the next line */
-                    justify-content: flex-start;
-                    /* Aligns cards to the left within the row */
-                    overflow-x: auto;
-                    /* Allows horizontal scrolling if total width exceeds screen */
-                }
-
-                .product-card {
-                    width: calc(50% - 10px);
-                    /* Sets width for two cards per row, subtracting space for margin */
-                    aspect-ratio: 1 / 1;
-                    /* Makes the boxes square */
-                    margin-bottom: 10px;
-                    /* Vertical gap between rows */
-                    margin-right: 10px;
-                    /* Horizontal gap between cards */
-                    box-sizing: border-box;
-                    /* Ensures padding and border are included in the width */
-                }
-
-                /* Remove margin-right from the last item in each row to avoid extra space */
-                .product-card:nth-child(2n) {
-                    margin-right: 0;
-                }
-
-                /* Important: Ensure the mobile overlay is always visible on small screens */
-                .product-card .overlay-mobile-show {
-                    opacity: 1 !important;
-                    pointer-events: auto !important;
-                    position: absolute;
-                    inset: 0;
-                    background: rgba(0, 0, 0, 0.6);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    padding: 1rem;
-                }
-
-                /* Ensure product cards that are supposed to be "hidden" by the JS carousel logic are truly hidden */
-                .product-card.hidden {
-                    display: none !important;
-                }
-            }
-
-            /* Styles for larger screens (769px and above) */
-            @media (min-width: 769px) {
-                #product-scroll {
-                    display: flex;
-                    gap: 1.5rem;
-                    /* Space between cards */
-                    justify-content: center;
-                    overflow: hidden;
-                    /* Hide overflow for carousel effect */
-                    width: 100%;
-                    max-width: 1000px;
-                    margin: 0 auto;
-                    flex-wrap: nowrap;
-                    /* Prevent wrapping on larger screens for the carousel */
-                }
-
-                .product-card {
-                    flex: 0 0 calc(33.333% - 1rem);
-                    /* Three cards per row */
-                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-                    border-radius: 0.5rem;
-                    overflow: hidden;
-                    cursor: pointer;
-                    transition: transform 0.3s;
-                    background: white;
-                    aspect-ratio: auto;
-                    /* Revert to natural aspect ratio or image's setting */
-                    margin-bottom: 0;
-                    margin-right: 0;
-                }
-
-                .product-card:hover {
-                    transform: scale(1.05);
-                }
-
-                .product-card.hidden {
-                    display: none;
-                }
-            }
-
-            /* Styles for navigation buttons */
-            #prevBtn,
-            #nextBtn {
-                background: white;
-                border: none;
-                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-                border-radius: 50%;
-                width: 36px;
-                height: 36px;
-                font-size: 20px;
-                cursor: pointer;
-                user-select: none;
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                z-index: 20;
-            }
-
-            #prevBtn {
-                left: 10px;
-            }
-
-            #nextBtn {
-                right: 10px;
-            }
-
-            #prevBtn:disabled,
-            #nextBtn:disabled {
-                opacity: 0.3;
-                cursor: default;
-            }
-
-            .product-card .overlay-mobile-show {
-                opacity: 1 !important;
-                pointer-events: auto !important;
-                position: absolute;
-                inset: 0;
-                background: rgba(0, 0, 0, 0.6);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 1rem;
-            }
-        }
-
-
-        @media (min-width: 769px) {
-            .product-card {
-                width: 33.3333%;
-                /* 3 cards per row on larger screens */
-                margin: 0;
-                box-sizing: border-box;
-            }
-        }
-
-        @media (max-width: 768px) {
-
-            /* This targets screens from 0px up to 768px */
-            .product-card {
-                width: 49%;
-                /* Roughly 2 cards per row (2 * 49% = 98%, leaving 2% for gap) */
-                margin: 0.5%;
-                /* Small margin to create space between cards */
-                box-sizing: border-box;
-                /* Ensures padding and border are included in the width */
-            }
-        }
-
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@400;600&display=swap');
-
-        body {
-            font-family: 'Open Sans', sans-serif;
-        }
-
-        .heading {
-            font-family: 'Playfair Display', serif;
-        }
     </style>
 </head>
 
@@ -306,8 +33,8 @@
         <nav class="hidden md:flex space-x-8 text-gray-700 text-lg">
             <a href="index.html" class="hover:text-blue-500 transition duration-300">Home</a>
             <a href="#products" class="hover:text-blue-500 transition duration-300">Products</a>
-            <a href="aboutus.html" class="hover:text-blue-500 transition duration-300">About Us</a>
-            <a href="contactus.html" class="hover:text-blue-500 transition duration-300">Contact Us</a>
+            <a href="#about" class="hover:text-blue-500 transition duration-300">About Us</a>
+            <a href="#contact" class="hover:text-blue-500 transition duration-300">Contact Us</a>
         </nav>
 
         <!-- Hamburger on right for mobile -->
@@ -327,8 +54,8 @@
         <nav class="flex flex-col mt-20 space-y-6 px-6">
             <a href="index.html" class="text-gray-700 text-lg hover:text-blue-500">Home</a>
             <a href="#products" class="text-gray-700 text-lg hover:text-blue-500">Products</a>
-            <a href="aboutus.html" class="text-gray-700 text-lg hover:text-blue-500">About Us</a>
-            <a href="contactus.html" class="text-gray-700 text-lg hover:text-blue-500">Contact Us</a>
+            <a href="#about" class="text-gray-700 text-lg hover:text-blue-500">About Us</a>
+            <a href="#contact" class="text-gray-700 text-lg hover:text-blue-500">Contact Us</a>
         </nav>
     </div>
 
@@ -376,6 +103,237 @@
 
     </section>
 
+    <style>
+        /* Existing global styles and hero section styles remain unchanged */
+
+        /* Styles for the product section */
+        .room-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hover overlay for larger screens */
+        .room-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(3px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+            padding: 1rem;
+        }
+
+        .room-container:hover .room-overlay {
+            transform: translateX(0);
+        }
+
+        .room-overlay-text {
+            color: #fff;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease 0.2s;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .room-container:hover .room-overlay-text {
+            opacity: 1;
+        }
+
+        /* Product scroll container (flexbox for cards) */
+        #product-scroll {
+            display: flex;
+            gap: 1.5rem;
+            /* Default gap for larger screens */
+            justify-content: center;
+            overflow: hidden;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            flex-wrap: nowrap;
+            /* Default: no wrapping for carousel */
+        }
+
+        /* Base product card styles */
+        .product-card {
+            flex: 0 0 auto;
+            /* Allow flex to control sizing */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+            background: white;
+            display: flex;
+            /* Make card a flex container */
+            flex-direction: column;
+            /* Stack image and info vertically */
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .product-card.hidden {
+            display: none;
+        }
+
+        /* Pagination Buttons */
+        #prevBtn,
+        #nextBtn {
+            background: white;
+            border: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            font-size: 20px;
+            cursor: pointer;
+            user-select: none;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+        }
+
+        #prevBtn {
+            left: 10px;
+        }
+
+        #nextBtn {
+            right: 10px;
+        }
+
+        #prevBtn:disabled,
+        #nextBtn:disabled {
+            opacity: 0.3;
+            cursor: default;
+        }
+
+        /* --- Responsive Styles for Smaller Screens (Max-width: 768px) --- */
+        @media (max-width: 768px) {
+            #product-scroll {
+                flex-wrap: wrap;
+                /* Allow cards to wrap to the next line */
+                justify-content: space-between;
+                /* Distribute space between cards */
+                gap: 0;
+                /* Remove default gap to manage spacing manually */
+                padding: 0 5px;
+                /* Small padding for the container */
+            }
+
+            .product-card {
+                width: calc(50% - 10px);
+                /* Two cards per row, with 10px total horizontal space */
+                margin-bottom: 15px;
+                /* Vertical space between rows */
+                /* IMPORTANT: Remove aspect-ratio from .product-card itself. Image is square now. */
+                /* aspect-ratio: 1 / 1; */
+                box-sizing: border-box;
+                /* Include padding/border in width */
+            }
+
+            /* Add right margin to the first card in each row */
+            .product-card:nth-child(odd) {
+                margin-right: 10px;
+                /* Space between the two cards in a row */
+            }
+
+            /* Ensure product cards that are supposed to be "hidden" by the JS carousel logic are truly hidden */
+            .product-card.hidden {
+                display: none !important;
+            }
+
+            /* Mobile Overlay: Always visible on small screens */
+            .product-card .overlay-mobile-show {
+                opacity: 1 !important;
+                pointer-events: auto !important;
+                position: absolute;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.8);
+                /* Slightly darker for better readability */
+                display: flex;
+                flex-direction: column;
+                /* Stack text elements */
+                align-items: center;
+                justify-content: center;
+                padding: 1rem;
+                box-sizing: border-box;
+                overflow-y: auto;
+                /* Allow scrolling for long text within the overlay */
+                font-size: 0.875rem;
+                /* Slightly smaller text for better fit */
+            }
+
+            .product-card .overlay-mobile-show p {
+                font-size: 0.875rem;
+                /* Ensure description text is also smaller */
+                line-height: 1.3;
+            }
+
+            .product-card .overlay-mobile-show p:first-child {
+                /* Specific for product title in overlay */
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            /* Adjust product info text below image for smaller screens */
+            .product-card .p-4 {
+                padding: 0.75rem;
+                /* Reduce padding */
+            }
+
+            .product-card h4 {
+                font-size: 1rem;
+                /* Smaller title */
+                margin-bottom: 0.25rem;
+            }
+
+            .product-card p.text-sm {
+                font-size: 0.8rem;
+                /* Smaller description */
+            }
+        }
+
+        /* --- Styles for Larger Screens (Min-width: 769px) --- */
+        @media (min-width: 769px) {
+            .product-card {
+                width: 33.3333%;
+                /* 3 cards per row on larger screens */
+                margin: 0;
+                box-sizing: border-box;
+                /* Revert to default flex item sizing or specific width */
+                flex: 0 0 calc(33.333% - 1rem);
+                /* 3 cards per row with gap */
+            }
+
+            /* Ensure the hover overlay behavior for larger screens */
+            .product-card .overlay-mobile-show {
+                opacity: 0;
+                /* Hidden by default */
+                pointer-events: none;
+                /* Do not block interaction */
+                background: rgba(0, 0, 0, 0.6);
+                /* Default overlay background */
+                transition: opacity 0.3s duration-300;
+                /* Re-enable transition */
+            }
+
+            .product-card.group:hover .overlay-mobile-show {
+                opacity: 1;
+                /* Show on hover */
+                pointer-events: auto;
+            }
+        }
+    </style>
+
     <section id="products" class="py-16 px-6 bg-white text-center relative" style="max-width: 1080px; margin: auto;">
         <h3 class="text-3xl font-serif text-blue-500 mb-10">Our Products</h3>
 
@@ -391,11 +349,11 @@
                 <!-- Slideshow Images -->
                 <div class="room-slideshow room-container relative" data-room="1">
                     <img src="https://i.pinimg.com/736x/b3/5e/be/b35ebeda415110e67100876c068c8152.jpg"
-                        class="slide-1 w-full h-[250px] object-cover block">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/21/b4/50/21b4500c8545c912dcd66abe66ec7b95.jpg"
-                        class="slide-1 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/d2/ec/23/d2ec239aec114d2c9fcb1b17c574edfd.jpg"
-                        class="slide-1 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
 
                     <!-- Hover Overlay -->
                     <div
@@ -424,11 +382,11 @@
                 <!-- Slideshow Images -->
                 <div class="room-slideshow room-container relative" data-room="2">
                     <img src="https://i.pinimg.com/736x/08/5d/96/085d96cd9d92c8c40f78835fbf795d4d.jpg"
-                        class="slide-2 w-full h-[250px] object-cover block">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/d0/ca/cb/d0cacb7ddb34ecbd47aa91b27eb120f5.jpg"
-                        class="slide-2 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/10/65/d6/1065d6f6eafe4cd685b0917ebf587bf6.jpg"
-                        class="slide-2 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
 
                     <!-- Hover Overlay -->
                     <div
@@ -457,11 +415,11 @@
                 <!-- Slideshow Images -->
                 <div class="room-slideshow room-container relative" data-room="3">
                     <img src="https://i.pinimg.com/736x/67/1d/d5/671dd5d25e9a560f4d1226f20870a2bc.jpg"
-                        class="slide-3 w-full h-[250px] object-cover block">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/74/21/02/742102ef2f6bde591dd757f6c089fd48.jpg"
-                        class="slide-3 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/83/80/b1/8380b13ee5bc01bc43f19bd5f0b40df5.jpg"
-                        class="slide-3 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
 
                     <!-- Hover Overlay -->
                     <div
@@ -489,11 +447,11 @@
             <div class="product-card group relative overflow-hidden rounded-lg shadow-md w-full sm:w-1/2 md:w-1/3 p-2">
                 <div class="room-slideshow room-container relative" data-room="4">
                     <img src="https://i.pinimg.com/736x/f4/17/7e/f4177e59523303409efc1d92bd8078c0.jpg"
-                        class="slide-4 w-full h-[250px] object-cover block">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/72/f1/1c/72f11ca97e1b01d86d704806c72fb6b1.jpg"
-                        class="slide-4 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/f1/7f/c2/f17fc2d835ee6d25936659e9fd9a0a7a.jpg"
-                        class="slide-4 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
 
                     <div
                         class="absolute inset-0 bg-black/60 opacity-0 overlay-mobile-show group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4 sm:p-6">
@@ -518,11 +476,11 @@
             <div class="product-card group relative overflow-hidden rounded-lg shadow-md w-full sm:w-1/2 md:w-1/3 p-2">
                 <div class="room-slideshow room-container relative" data-room="5">
                     <img src="https://i.pinimg.com/736x/14/6b/3b/146b3be2c31c8ce03c62aee051d71ef7.jpg"
-                        class="slide-5 w-full h-[250px] object-cover block">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/5c/07/fb/5c07fba545c24f66cd53ee165092a0d0.jpg"
-                        class="slide-5 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/0f/17/da/0f17da45e490a11eb8b0b7fdf06f9068.jpg"
-                        class="slide-5 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
 
                     <div
                         class="absolute inset-0 bg-black/60 opacity-0 overlay-mobile-show group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4 sm:p-6">
@@ -547,11 +505,11 @@
             <div class="product-card group relative overflow-hidden rounded-lg shadow-md w-full sm:w-1/2 md:w-1/3 p-2">
                 <div class="room-slideshow room-container relative" data-room="6">
                     <img src="https://i.pinimg.com/736x/2b/65/75/2b65753632e6a30e1e344eb29b6767af.jpg"
-                        class="slide-6 w-full h-[250px] object-cover block">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/6e/dd/5e/6edd5e9fa5146eb17737fb3ac36b2dc7.jpg"
-                        class="slide-6 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/f7/02/94/f70294f0932df6a87cc83dccf2f5ba30.jpg"
-                        class="slide-6 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
 
                     <!-- Hover Overlay -->
                     <div
@@ -577,11 +535,11 @@
             <div class="product-card group relative overflow-hidden rounded-lg shadow-md w-full sm:w-1/2 md:w-1/3 p-2">
                 <div class="room-slideshow room-container relative" data-room="7">
                     <img src="https://i.pinimg.com/736x/c2/42/23/c24223e379fe84557b93ab7636a59d75.jpg"
-                        class="slide-7 w-full h-[250px] object-cover block">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/0c/2c/90/0c2c905c581f76ef289f86ae6265b1d1.jpg"
-                        class="slide-7 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/b8/ee/b3/b8eeb37b6886ce048e97e8592502e316.jpg"
-                        class="slide-7 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
 
                     <!-- Hover Overlay -->
                     <div
@@ -605,11 +563,11 @@
             <div class="product-card group relative overflow-hidden rounded-lg shadow-md w-full sm:w-1/2 md:w-1/3 p-2">
                 <div class="room-slideshow room-container relative" data-room="8">
                     <img src="https://i.pinimg.com/736x/41/c5/b0/41c5b0c019278b7246a5c36cc8ba4b7f.jpg"
-                        class="slide-8 w-full h-[250px] object-cover block">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/c4/4c/a4/c44ca434db7cf26cd9f56fa88c2bc8c2.jpg"
-                        class="slide-8 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/fc/2c/9e/fc2c9e79c1116673e3dc5276e9f149ae.jpg"
-                        class="slide-8 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
 
                     <!-- Hover Overlay -->
                     <div
@@ -634,11 +592,11 @@
             <div class="product-card group relative overflow-hidden rounded-lg shadow-md w-full sm:w-1/2 md:w-1/3 p-2">
                 <div class="room-slideshow room-container relative" data-room="9">
                     <img src="https://i.pinimg.com/736x/8b/8a/87/8b8a87337ee554f7c400dd5742d5df1d.jpg"
-                        class="slide-9 w-full h-[250px] object-cover block">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/a9/2a/81/a92a816eef9ce7850fc325f9245c496a.jpg"
-                        class="slide-9 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/d6/dd/7c/d6dd7c855a3dbaf5c6389bd2270520d0.jpg"
-                        class="slide-9 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
 
                     <!-- Hover Overlay -->
                     <div
@@ -665,11 +623,11 @@
             <div class="product-card group relative overflow-hidden rounded-lg shadow-md w-full sm:w-1/2 md:w-1/3 p-2">
                 <div class="room-slideshow room-container relative" data-room="10">
                     <img src="https://i.pinimg.com/736x/03/5c/ac/035cacbdb46e4d3c92f88724e20e5fac.jpg"
-                        class="slide-10 w-full h-[250px] object-cover block">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/20/00/89/200089f22b0864460ed1d12d8466fd3e.jpg"
-                        class="slide-10 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/8f/23/a0/8f23a08ec109ce03b5261c35f307ec68.jpg"
-                        class="slide-10 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
 
                     <!-- Hover Overlay -->
                     <div
@@ -693,11 +651,11 @@
             <div class="product-card group relative overflow-hidden rounded-lg shadow-md w-full sm:w-1/2 md:w-1/3 p-2">
                 <div class="room-slideshow room-container relative" data-room="11">
                     <img src="https://i.pinimg.com/736x/8e/f0/bd/8ef0bd1d21d74fc221bbda1776dcb5c3.jpg"
-                        class="slide-11 w-full h-[250px] object-cover block">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/bb/d8/a0/bbd8a0c468dc81eb013173570db84be5.jpg"
-                        class="slide-11 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/9e/2b/e5/9e2be58d36bb20ee9eeecde2093754cd.jpg"
-                        class="slide-11 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
 
                     <!-- Hover Overlay -->
                     <div
@@ -721,11 +679,11 @@
             <div class="product-card group relative overflow-hidden rounded-lg shadow-md w-full sm:w-1/2 md:w-1/3 p-2">
                 <div class="room-slideshow room-container relative" data-room="12">
                     <img src="https://i.pinimg.com/736x/81/7b/df/817bdfe88620a04191f4a457e843e9b5.jpg"
-                        class="slide-12 w-full h-[250px] object-cover block">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/e9/82/8b/e9828ba4241152ff08f2669115691a63.jpg"
-                        class="slide-12 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
                     <img src="https://i.pinimg.com/736x/c7/43/1c/c7431ca7cf3aa9e22f00a831cda47d1f.jpg"
-                        class="slide-12 w-full h-[250px] object-cover hidden">
+                        class="slide-1 w-full object-cover block aspect-square">
 
                     <!-- Hover Overlay -->
                     <div
