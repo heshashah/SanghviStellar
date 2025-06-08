@@ -221,34 +221,27 @@
             #product-scroll {
                 flex-wrap: wrap;
                 /* Allow cards to wrap to the next line */
-                justify-content: space-between;
-                /* Distribute space between cards */
-                gap: 0;
-                /* Remove default gap to manage spacing manually */
-                padding: 0 5px;
-                /* Small padding for the container */
+                justify-content: center;
+                /* Center the rows of cards if there's leftover space */
+                gap: 15px;
+                /* Consistent gap between cards and rows */
+                padding: 0 10px;
+                /* Small horizontal padding for the overall product container */
             }
 
             .product-card {
-                width: calc(50% - 10px);
-                /* Two cards per row, with 10px total horizontal space */
-                margin-bottom: 15px;
-                /* Vertical space between rows */
-                /* IMPORTANT: Remove aspect-ratio from .product-card itself. Image is square now. */
-                /* aspect-ratio: 1 / 1; */
+                width: calc(50% - 15px);
+                /* Two cards per row, leaving space for the gap */
+                margin-bottom: 0;
+                /* Gap handles vertical spacing */
+                margin-right: 0;
+                /* Gap handles horizontal spacing */
                 box-sizing: border-box;
-                /* Include padding/border in width */
             }
 
-            /* Add right margin to the first card in each row */
-            .product-card:nth-child(odd) {
-                margin-right: 10px;
-                /* Space between the two cards in a row */
-            }
-
-            /* Ensure product cards that are supposed to be "hidden" by the JS carousel logic are truly hidden */
-            .product-card.hidden {
-                display: none !important;
+            /* Remove specific nth-child margins as gap handles it */
+            .product-card:nth-child(2n) {
+                margin-right: 0;
             }
 
             /* Mobile Overlay: Always visible on small screens */
@@ -265,23 +258,27 @@
                 align-items: center;
                 justify-content: center;
                 padding: 1rem;
+                /* Increase padding slightly if needed */
                 box-sizing: border-box;
                 overflow-y: auto;
                 /* Allow scrolling for long text within the overlay */
-                font-size: 0.875rem;
-                /* Slightly smaller text for better fit */
+                text-align: center;
+                /* Center text within overlay */
             }
 
             .product-card .overlay-mobile-show p {
                 font-size: 0.875rem;
                 /* Ensure description text is also smaller */
                 line-height: 1.3;
+                margin-bottom: 0.5rem;
+                /* Space between title and description */
             }
 
             .product-card .overlay-mobile-show p:first-child {
                 /* Specific for product title in overlay */
-                font-size: 1rem;
-                margin-bottom: 0.5rem;
+                font-size: 1.1rem;
+                /* Slightly larger title in overlay */
+                font-weight: bold;
             }
 
             /* Adjust product info text below image for smaller screens */
@@ -291,14 +288,20 @@
             }
 
             .product-card h4 {
-                font-size: 1rem;
-                /* Smaller title */
+                font-size: 1.1rem;
+                /* Slightly larger main title below image */
                 margin-bottom: 0.25rem;
             }
 
             .product-card p.text-sm {
-                font-size: 0.8rem;
-                /* Smaller description */
+                font-size: 0.85rem;
+                /* Slightly larger description below image */
+                line-height: 1.3;
+            }
+
+            /* Ensure product cards that are supposed to be "hidden" by the JS carousel logic are truly hidden */
+            .product-card.hidden {
+                display: none !important;
             }
         }
 
