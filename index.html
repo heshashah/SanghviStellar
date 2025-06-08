@@ -125,6 +125,126 @@
                 box-sizing: border-box;
             }
 
+            @media (max-width: 768px) {
+                #product-scroll {
+                    display: flex;
+                    flex-wrap: wrap;
+                    /* Allows cards to wrap to the next line */
+                    justify-content: flex-start;
+                    /* Aligns cards to the left within the row */
+                    overflow-x: auto;
+                    /* Allows horizontal scrolling if total width exceeds screen */
+                }
+
+                .product-card {
+                    width: calc(50% - 10px);
+                    /* Sets width for two cards per row, subtracting space for margin */
+                    aspect-ratio: 1 / 1;
+                    /* Makes the boxes square */
+                    margin-bottom: 10px;
+                    /* Vertical gap between rows */
+                    margin-right: 10px;
+                    /* Horizontal gap between cards */
+                    box-sizing: border-box;
+                    /* Ensures padding and border are included in the width */
+                }
+
+                /* Remove margin-right from the last item in each row to avoid extra space */
+                .product-card:nth-child(2n) {
+                    margin-right: 0;
+                }
+
+                /* Important: Ensure the mobile overlay is always visible on small screens */
+                .product-card .overlay-mobile-show {
+                    opacity: 1 !important;
+                    pointer-events: auto !important;
+                    position: absolute;
+                    inset: 0;
+                    background: rgba(0, 0, 0, 0.6);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 1rem;
+                }
+
+                /* Ensure product cards that are supposed to be "hidden" by the JS carousel logic are truly hidden */
+                .product-card.hidden {
+                    display: none !important;
+                }
+            }
+
+            /* Styles for larger screens (769px and above) */
+            @media (min-width: 769px) {
+                #product-scroll {
+                    display: flex;
+                    gap: 1.5rem;
+                    /* Space between cards */
+                    justify-content: center;
+                    overflow: hidden;
+                    /* Hide overflow for carousel effect */
+                    width: 100%;
+                    max-width: 1000px;
+                    margin: 0 auto;
+                    flex-wrap: nowrap;
+                    /* Prevent wrapping on larger screens for the carousel */
+                }
+
+                .product-card {
+                    flex: 0 0 calc(33.333% - 1rem);
+                    /* Three cards per row */
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                    border-radius: 0.5rem;
+                    overflow: hidden;
+                    cursor: pointer;
+                    transition: transform 0.3s;
+                    background: white;
+                    aspect-ratio: auto;
+                    /* Revert to natural aspect ratio or image's setting */
+                    margin-bottom: 0;
+                    margin-right: 0;
+                }
+
+                .product-card:hover {
+                    transform: scale(1.05);
+                }
+
+                .product-card.hidden {
+                    display: none;
+                }
+            }
+
+            /* Styles for navigation buttons */
+            #prevBtn,
+            #nextBtn {
+                background: white;
+                border: none;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+                border-radius: 50%;
+                width: 36px;
+                height: 36px;
+                font-size: 20px;
+                cursor: pointer;
+                user-select: none;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 20;
+            }
+
+            #prevBtn {
+                left: 10px;
+            }
+
+            #nextBtn {
+                right: 10px;
+            }
+
+            #prevBtn:disabled,
+            #nextBtn:disabled {
+                opacity: 0.3;
+                cursor: default;
+            }
+
             .product-card .overlay-mobile-show {
                 opacity: 1 !important;
                 pointer-events: auto !important;
